@@ -9,33 +9,37 @@ MAP_WIDTH :: 24
 MAP_HEIGHT :: 24
 SCREEN_WIDTH :: 640
 SCREEN_HEIGHT :: 480
+TEX_WIDTH :: 64
+TEX_HEIGHT :: 64
 
 world_map: [MAP_WIDTH][MAP_HEIGHT]int = {
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
+    {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+    {4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+    {4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+    {4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+    {4,0,4,0,0,0,0,5,5,5,5,5,5,5,5,5,7,7,0,7,7,7,7,7},
+    {4,0,5,0,0,0,0,5,0,5,0,5,0,5,0,5,7,0,0,0,7,7,7,1},
+    {4,0,6,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+    {4,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,1},
+    {4,0,8,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+    {4,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,7,7,7,1},
+    {4,0,0,0,0,0,0,5,5,5,5,0,5,5,5,5,7,7,7,7,7,7,7,1},
+    {6,6,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+    {8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+    {6,6,6,6,6,6,0,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+    {4,4,4,4,4,4,0,4,4,4,6,0,6,2,2,2,2,2,2,2,3,3,3,3},
+    {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+    {4,0,0,0,0,0,0,0,0,0,0,0,6,2,0,0,5,0,0,2,0,0,0,2},
+    {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+    {4,0,6,0,6,0,0,0,0,4,6,0,0,0,0,0,5,0,0,0,0,0,0,2},
+    {4,0,0,5,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+    {4,0,6,0,6,0,0,0,0,4,6,0,6,2,0,0,5,0,0,2,0,0,0,2},
+    {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+    {4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
 }
+
+buffer: [SCREEN_HEIGHT][SCREEN_WIDTH]u32 // y-coordinate first because it works per scanline
 
 main :: proc() {
     // x and y start position
@@ -50,8 +54,44 @@ main :: proc() {
     plane_x: f64 = 0
     plane_y: f64 = 0.66
 
+    texture: [8][dynamic]u32
+    for i in 0..<8 {
+        resize(&texture[i], TEX_WIDTH * TEX_HEIGHT)
+    }
+
     rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Odin raycaster")
     rl.SetTargetFPS(60)
+
+    pack_rgba :: proc(r, g, b: u32) -> u32 {
+        return r | (g << 8) | (b << 16) | (0xFF << 24)
+    }
+
+    //generate some textures
+    for x in 0..<TEX_WIDTH {
+        for y in 0..<TEX_HEIGHT {
+            xorcolor := u32((x * 256 / TEX_WIDTH) ~ (y * 256 / TEX_HEIGHT))
+            ycolor := u32(y * 256 / TEX_HEIGHT)
+            xycolor := u32(y * 128 / TEX_HEIGHT + x * 128 / TEX_WIDTH)
+
+            cross := u32(254 * int(x != y && x != TEX_WIDTH - y))
+            bricks := u32(192 * int(x % 16 != 0 && y % 16 != 0))
+
+            texture[0][TEX_WIDTH * y + x] = pack_rgba(cross, 0, 0)                    // flat red mit schwarzem Kreuz
+            texture[1][TEX_WIDTH * y + x] = pack_rgba(xycolor, xycolor, xycolor)      // sloped greyscale
+            texture[2][TEX_WIDTH * y + x] = pack_rgba(xycolor, xycolor, 0)            // sloped yellow gradient
+            texture[3][TEX_WIDTH * y + x] = pack_rgba(xorcolor, xorcolor, xorcolor)   // xor greyscale
+            texture[4][TEX_WIDTH * y + x] = pack_rgba(0, xorcolor, 0)                 // xor green
+            texture[5][TEX_WIDTH * y + x] = pack_rgba(bricks, 0, 0)                   // red bricks
+            texture[6][TEX_WIDTH * y + x] = pack_rgba(ycolor, 0, 0)                   // red gradient
+            texture[7][TEX_WIDTH * y + x] = pack_rgba(128, 128, 128)                  // flat grey
+        }
+    }
+
+    // setup for passing the buffer to raylib in the main loop
+    screen_image := rl.GenImageColor(SCREEN_WIDTH, SCREEN_HEIGHT, rl.BLACK)
+    screen_texture := rl.LoadTextureFromImage(screen_image)
+    rl.UnloadImage(screen_image)
+    defer rl.UnloadTexture(screen_texture)
 
 	for !rl.WindowShouldClose() {
         frame_time: f64 = f64(rl.GetFrameTime())
@@ -112,7 +152,7 @@ main :: proc() {
                 side_dist_y = (f64(map_y) + 1.0 - pos_y) * delta_dist_y;
             }
 
-            //perform DDA
+            // perform DDA
             for (hit == false)
             {
                 //jump to next map square, either in x-direction, or in y-direction
@@ -126,39 +166,60 @@ main :: proc() {
                     side = 1
                 }
 
-                //Check if ray has hit a wall
+                // Check if ray has hit a wall
                 if world_map[map_x][map_y] > 0 do hit = true;
             }
 
-            //Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+            // Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
             if side == 0 do perp_wall_dist = side_dist_x - delta_dist_x
             else do perp_wall_dist = side_dist_y - delta_dist_y
             
-            //Calculate height of line to draw on screen
-            lineHeight := int(SCREEN_HEIGHT / perp_wall_dist)
+            // Calculate height of line to draw on screen
+            line_height := int(SCREEN_HEIGHT / perp_wall_dist)
 
-            //calculate lowest and highest pixel to fill in current stripe
-            drawStart := -lineHeight / 2 + SCREEN_HEIGHT / 2
-            if(drawStart < 0) do drawStart = 0
-            drawEnd := lineHeight / 2 + SCREEN_HEIGHT / 2;
-            if(drawEnd >= SCREEN_HEIGHT) do drawEnd = SCREEN_HEIGHT - 1;
+            // calculate lowest and highest pixel to fill in current stripe
+            draw_start := -line_height / 2 + SCREEN_HEIGHT / 2
+            if(draw_start < 0) do draw_start = 0
+            draw_end := line_height / 2 + SCREEN_HEIGHT / 2;
+            if(draw_end >= SCREEN_HEIGHT) do draw_end = SCREEN_HEIGHT - 1;
 
-            //choose wall color
-            color: rl.Color
-            switch(world_map[map_x][map_y])
-            {
-                case 1: color = rl.RED
-                case 2: color = rl.GREEN
-                case 3: color = rl.BLUE
-                case 4: color = rl.WHITE
-                case: color = rl.YELLOW
+            //texturing calculations
+            tex_num := world_map[map_x][map_y] - 1; // 1 subtracted from it so that texture 0 can be used!
+
+            // calculate value of wallX
+            wall_x: f64 //where exactly the wall was hit
+            if (side == 0) do wall_x = pos_y + perp_wall_dist * ray_dir_y
+            else do wall_x = pos_x + perp_wall_dist * ray_dir_x
+            wall_x -= math.floor(wall_x)
+
+            // x coordinate on the texture
+            tex_x := int(wall_x * f64(TEX_WIDTH))
+            if(side == 0 && ray_dir_x > 0) do tex_x = TEX_WIDTH - tex_x - 1
+            if(side == 1 && ray_dir_y < 0) do tex_x = TEX_WIDTH - tex_x - 1
+
+            // How much to increase the texture coordinate per screen pixel
+            step: f64 = 1.0 * f64(TEX_HEIGHT) / f64(line_height)
+            // Starting texture coordinate
+            tex_pos: f64 = (f64(draw_start) - f64(SCREEN_HEIGHT) / 2 + f64(line_height) / 2) * step
+            for y in draw_start..<draw_end {
+                // Cast the texture coordinate to integer, and mask with (tex_height - 1) in case of overflow
+                tex_y := int(tex_pos) & (TEX_HEIGHT - 1)
+                tex_pos += step
+                color := texture[tex_num][TEX_HEIGHT * tex_x + tex_y]
+                // make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+                if side == 1 do color = (color & 0xFF000000) | ((color >> 1) & 0x007F7F7F)
+                buffer[y][x] = color
             }
+        }
 
-            //give x and y sides different brightness
-            if (side == 1) do color = color / 2
+        rl.UpdateTexture(screen_texture, &buffer[0][0])
+        rl.DrawTexture(screen_texture, 0, 0, rl.WHITE)
 
-            //draw the pixels of the stripe as a vertical line
-            rl.DrawLine(c.int(x), c.int(drawStart), c.int(x), c.int(drawEnd), color)
+        // clear the buffer instead of cls()
+        for y in 0..<SCREEN_HEIGHT {
+            for x in 0..<SCREEN_WIDTH {
+                buffer[y][x] = 0
+            }
         }
 
         // move forward if no wall in front of you
