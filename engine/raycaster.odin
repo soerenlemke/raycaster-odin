@@ -2,7 +2,7 @@ package engine
 
 import "core:math"
 
-cast_column :: proc(x: int, p: Player) {
+cast_column :: proc(x: int, #by_ptr p: Player) {
 	camera_x := 2 * f64(x) / f64(SCREEN_WIDTH) - 1
 	ray_dir_x := p.dir_x + p.plane_x * camera_x
 	ray_dir_y := p.dir_y + p.plane_y * camera_x
