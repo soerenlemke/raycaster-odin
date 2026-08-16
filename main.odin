@@ -2,6 +2,7 @@ package main
 
 import "core:c"
 import "core:math"
+import "core:slice"
 
 import rl "vendor:raylib"
 
@@ -54,11 +55,6 @@ main :: proc() {
     plane_x: f64 = 0
     plane_y: f64 = 0.66
 
-    texture: [8][dynamic]u32
-    for i in 0..<8 {
-        resize(&texture[i], TEX_WIDTH * TEX_HEIGHT)
-    }
-
     rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Odin raycaster")
     rl.SetTargetFPS(60)
 
@@ -66,25 +62,34 @@ main :: proc() {
         return r | (g << 8) | (b << 16) | (0xFF << 24)
     }
 
-    //generate some textures
-    for x in 0..<TEX_WIDTH {
-        for y in 0..<TEX_HEIGHT {
-            xorcolor := u32((x * 256 / TEX_WIDTH) ~ (y * 256 / TEX_HEIGHT))
-            ycolor := u32(y * 256 / TEX_HEIGHT)
-            xycolor := u32(y * 128 / TEX_HEIGHT + x * 128 / TEX_WIDTH)
+    texture: [8][dynamic]u32
 
-            cross := u32(254 * int(x != y && x != TEX_WIDTH - y))
-            bricks := u32(192 * int(x % 16 != 0 && y % 16 != 0))
+    texture_files := [8]cstring{
+        "assets/eagle.png",
+        "assets/redbrick.png",
+        "assets/purplestone.png",
+        "assets/greystone.png",
+        "assets/bluestone.png",
+        "assets/mossy.png",
+        "assets/wood.png",
+        "assets/colorstone.png",
+    }
 
-            texture[0][TEX_WIDTH * y + x] = pack_rgba(cross, 0, 0)                    // flat red mit schwarzem Kreuz
-            texture[1][TEX_WIDTH * y + x] = pack_rgba(xycolor, xycolor, xycolor)      // sloped greyscale
-            texture[2][TEX_WIDTH * y + x] = pack_rgba(xycolor, xycolor, 0)            // sloped yellow gradient
-            texture[3][TEX_WIDTH * y + x] = pack_rgba(xorcolor, xorcolor, xorcolor)   // xor greyscale
-            texture[4][TEX_WIDTH * y + x] = pack_rgba(0, xorcolor, 0)                 // xor green
-            texture[5][TEX_WIDTH * y + x] = pack_rgba(bricks, 0, 0)                   // red bricks
-            texture[6][TEX_WIDTH * y + x] = pack_rgba(ycolor, 0, 0)                   // red gradient
-            texture[7][TEX_WIDTH * y + x] = pack_rgba(128, 128, 128)                  // flat grey
-        }
+    // generate some textures
+    for i in 0..<8 {
+        img := rl.LoadImage(texture_files[i])
+        defer rl.UnloadImage(img)
+
+        // Ensure the format matches our u32 buffer (R8G8B8A8)
+        rl.ImageFormat(&img, .UNCOMPRESSED_R8G8B8A8)
+
+        pixel_count := int(img.width) * int(img.height)
+        resize(&texture[i], pixel_count)
+
+        // Reinterpret the raw pointer as a slice
+        pixels := (^u32)(img.data)
+        pixel_slice := slice.from_ptr(pixels, pixel_count)
+        copy(texture[i][:], pixel_slice)
     }
 
     // setup for passing the buffer to raylib in the main loop
