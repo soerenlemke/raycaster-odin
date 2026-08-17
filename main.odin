@@ -9,7 +9,7 @@ main :: proc() {
 	rl.InitWindow(engine.SCREEN_WIDTH, engine.SCREEN_HEIGHT, "Odin raycaster")
 	rl.SetTargetFPS(60)
 
-	engine.load_assets()
+	engine.assets_load()
 	engine.screen_init()
 	defer engine.screen_shutdown()
 
@@ -20,9 +20,8 @@ main :: proc() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
 
-		for x in 0 ..< engine.SCREEN_WIDTH {
-			engine.cast_column(x, player)
-		}
+		engine.cast_floor(player)
+		engine.cast_walls(player)
 
 		engine.screen_present()
 		engine.screen_buffer_clear()
